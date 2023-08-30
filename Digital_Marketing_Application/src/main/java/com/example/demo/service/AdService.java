@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Advertisement;
@@ -15,13 +18,7 @@ public class AdService {
 	@Autowired
 	AdRepo adr;
 	
-	public Optional<Advertisement> getById(int id) {
-		return adr.findById(id);
-	}
-	public List<Advertisement> getAll() {
-		return adr.findAll();
-	}
-	
+	//post
 	public Advertisement postData(Advertisement pd) {
 		return adr.save(pd);
 	}
@@ -29,6 +26,15 @@ public class AdService {
 		return (List<Advertisement>)adr.saveAll(pd);
 	}
 	
+	//get
+	public Optional<Advertisement> getById(int id) {
+		return adr.findById(id);
+	}
+	public List<Advertisement> getAll() {
+		return adr.findAll();
+	}
+	
+	//put
 	public Advertisement putData(int id, Advertisement ad) {
 		Advertisement exist = adr.findById(id).orElse(null);
 		if(exist != null)
@@ -64,9 +70,36 @@ public class AdService {
 		}
 	}
 	
+	//delete
 	public boolean deleteData(int id) {
 		adr.deleteById(id);
 		return true;
 	}
-
+	
+	//sort
+	public List<Advertisement> sortData(String field) {
+		return adr.findAll(Sort.by(Sort.DEFAULT_DIRECTION, field));
+	}
+	
+	//pagination
+	public List<Advertisement> getPage(int pgNo,int pgSize) {
+		Page<Advertisement> p = adr.findAll(PageRequest.of(pgNo, pgSize));
+		return p.getContent();
+	}
+	
+	//select
+	public List<Advertisement> selectByData(String field,int value) {
+		return adr.selectData(field, value);
+	}
+	
+	//update
+	public boolean updateValue(String changeField,String changeValue,String checkField,String checkValue) {
+		try {
+			adr.updateData(changeField, changeValue, checkField, checkValue);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
 }

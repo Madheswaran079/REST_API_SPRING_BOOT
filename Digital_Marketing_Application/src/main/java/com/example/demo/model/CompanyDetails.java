@@ -1,11 +1,15 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class CompanyDetails {
@@ -19,6 +23,18 @@ public class CompanyDetails {
 	private LocalDate startDate;
 	private float revenue;
 	private int branch;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "customerId")
+	private List<Advertisement> ad;
+	
+	public List<Advertisement> getAd() {
+		return ad;
+	}
+	public void setAd(List<Advertisement> ad) {
+		this.ad = ad;
+	}
+	
 	public CompanyDetails() {
 		super();
 		// TODO Auto-generated constructor stub

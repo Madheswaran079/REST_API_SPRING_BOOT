@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,5 +64,28 @@ public class PDController {
 			return "Details of id " + id + " deleted successfully.";
 		}
 		return "Failed to delete";
+	}
+	
+	@GetMapping("/sortPD/{field}")
+	public List<PersonalDetails> sortByField(@PathVariable(value = "field") String field) {
+		return pds.sortData(field);
+	}
+	
+	@GetMapping("/pagePD/{pgNum}/{pgSize}")
+	public List<PersonalDetails> getAsPage(@PathVariable(value = "pgNum") int pgNum, @PathVariable(value = "pgSize") int pgSize) {
+		return pds.getPage(pgNum, pgSize);
+	}
+	
+	@GetMapping("/selectPD/{field}/{value}")
+	public List<PersonalDetails> selectTheData(@PathVariable(value = "field") String field, @PathVariable(value = "value") String value) {
+		return pds.selectByData(field, value);
+	}
+	
+	@GetMapping("/updatePD/{changeField}/{changeValue}/{checkField}/{checkValue}")
+	public String updateTheData(@PathVariable(value = "changeField")String changeField,@PathVariable(value = "changeValue")String changeValue,@PathVariable(value = "checkField")String checkField,@PathVariable(value = "checkValue")String checkValue) {
+		if(pds.updateValue(changeField,changeValue,checkField,checkValue)) {
+			return "Updated successfully..!";
+		}
+		return "Can not update";
 	}
 }
