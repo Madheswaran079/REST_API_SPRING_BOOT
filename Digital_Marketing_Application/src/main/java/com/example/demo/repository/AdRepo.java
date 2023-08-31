@@ -13,11 +13,12 @@ import jakarta.transaction.Transactional;
 
 public interface AdRepo extends JpaRepository<Advertisement, Integer>{
 
-	@Query(value = "SELECT * FROM Advertisement where :field = :value", nativeQuery = true)
-	public List<Advertisement> selectData(@Param(value = "field") String field, @Param(value = "value") int value);
+	@Query(value = "SELECT * FROM Advertisement where rate > :value", nativeQuery = true)
+	public List<Advertisement> selectData(@Param(value = "value") float value);
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE Advertisement SET :changeField = :changeValue WHERE :checkField = :checkValue", nativeQuery = true)
-	public String updateData(@Param(value = "changeField") String changeField, @Param(value = "changeValue") String changeValue, @Param(value = "checkField") String checkField, @Param(value = "checkValue") String checkValue );
+	@Query(value = "UPDATE Advertisement SET deal_duration = :changeValue WHERE product = :checkValue", nativeQuery = true)
+	public Integer updateData(@Param("changeValue") int changeValue, @Param("checkValue") String checkValue );
+
 }

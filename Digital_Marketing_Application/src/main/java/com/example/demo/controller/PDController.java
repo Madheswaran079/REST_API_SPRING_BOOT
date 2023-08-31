@@ -76,16 +76,28 @@ public class PDController {
 		return pds.getPage(pgNum, pgSize);
 	}
 	
-	@GetMapping("/selectPD/{field}/{value}")
-	public List<PersonalDetails> selectTheData(@PathVariable(value = "field") String field, @PathVariable(value = "value") String value) {
-		return pds.selectByData(field, value);
+	@GetMapping("/selectPD/{value}")
+	public List<PersonalDetails> selectTheData(@PathVariable(value = "value") String value) {
+		return pds.selectByData(value);
 	}
 	
-	@GetMapping("/updatePD/{changeField}/{changeValue}/{checkField}/{checkValue}")
-	public String updateTheData(@PathVariable(value = "changeField")String changeField,@PathVariable(value = "changeValue")String changeValue,@PathVariable(value = "checkField")String checkField,@PathVariable(value = "checkValue")String checkValue) {
-		if(pds.updateValue(changeField,changeValue,checkField,checkValue)) {
+	@PutMapping("/updateQPD/{changeValue}/{checkValue}")
+	public String updateTheData(@PathVariable(value = "changeValue")long changeValue, @PathVariable(value = "checkValue")String checkValue) {
+		if(pds.updateValue(changeValue,checkValue)) {
 			return "Updated successfully..!";
 		}
 		return "Can not update";
 	}
+	
+//	@DeleteMapping("/deleteQPD/{name}")
+//	public String deleteTheData(@PathVariable(value = "name") String name) {
+//		try{
+//			pds.deleteValue(name);
+//			return "Deleted successfully..!";
+//		}
+//		catch(Exception e) {
+//			e.printStackTrace();
+//			return "Can not delete";
+//		}
+//	}
 }

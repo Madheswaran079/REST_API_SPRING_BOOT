@@ -13,11 +13,16 @@ import jakarta.transaction.Transactional;
 
 public interface PDRepo extends JpaRepository<PersonalDetails, Integer>{
 
-	@Query(value = "SELECT * FROM Personal_Details where :field = :value", nativeQuery = true)
-	public List<PersonalDetails> selectData(@Param(value = "field") String field, @Param(value = "value") String value);
+	@Query(value = "SELECT * FROM Personal_Details where user_name = :value", nativeQuery = true)
+	public List<PersonalDetails> selectData(@Param(value = "value") String value);
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE Personal_Details SET :changeField = :changeValue WHERE :checkField = :checkValue", nativeQuery = true)
-	public String updateData(@Param(value = "changeField") String changeField, @Param(value = "changeValue") String changeValue, @Param(value = "checkField") String checkField, @Param(value = "checkValue") String checkValue );
+	@Query(value = "UPDATE Personal_Details SET phone_num = :changeValue WHERE name = :checkValue", nativeQuery = true)
+	public Integer updateData(@Param("changeValue") long changeValue, @Param("checkValue") String checkValue );
+//
+//	@Modifying
+//    @Transactional
+//    @Query(value = "DELETE FROM Personal_Details WHERE name = :name")
+//	public Integer deleteData(@Param("name") String name);
 }

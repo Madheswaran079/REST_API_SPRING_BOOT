@@ -15,7 +15,7 @@ import jakarta.persistence.OneToMany;
 public class CompanyDetails {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int customerId;
 	private String domain;
 	private String companyName;
@@ -40,7 +40,7 @@ public class CompanyDetails {
 		// TODO Auto-generated constructor stub
 	}
 	public CompanyDetails(int customerId, String domain, String companyName, String companyEmail,
-			LocalDate startDate, float revenue, int branch) {
+			LocalDate startDate, float revenue, int branch, List<Advertisement> ad) {
 		super();
 		this.customerId = customerId;
 		this.domain = domain;
@@ -49,6 +49,7 @@ public class CompanyDetails {
 		this.startDate = startDate;
 		this.revenue = revenue;
 		this.branch = branch;
+		this.ad = ad;
 	}
 	public int getCustomerId() {
 		return customerId;

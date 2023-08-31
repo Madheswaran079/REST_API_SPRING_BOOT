@@ -92,18 +92,19 @@ public class CDService {
 	}
 	
 	//select
-	public List<CompanyDetails> selectByData(String field,int value) {
-		return cdr.selectData(field, value);
+	public List<CompanyDetails> selectByData(int value) {
+		return cdr.selectData(value);
 	}
 	
 	//update
-	public boolean updateValue(String changeField,String changeValue,String checkField,String checkValue) {
+	public boolean updateValue(float changeValue,String checkValue) {
 		try {
-			cdr.updateData(changeField, changeValue, checkField, checkValue);
+			cdr.updateData(changeValue, checkValue);
 			return true;
 		}
 		catch(Exception e) {
 			return false;
 		}
 	}
+	
 }

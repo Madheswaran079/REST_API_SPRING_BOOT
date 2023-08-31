@@ -13,11 +13,12 @@ import jakarta.transaction.Transactional;
 
 public interface CDRepo extends JpaRepository<CompanyDetails, Integer>{
 
-	@Query(value = "SELECT * FROM Company_Details where :field = :value", nativeQuery = true)
-	public List<CompanyDetails> selectData(@Param(value = "field") String field, @Param(value = "value") int value);
+	@Query(value = "SELECT * FROM Company_Details where branch = :value", nativeQuery = true)
+	public List<CompanyDetails> selectData(@Param(value = "value") int value);
 
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE Company_Details SET :changeField = :changeValue WHERE :checkField = :checkValue", nativeQuery = true)
-	public String updateData(@Param(value = "changeField") String changeField, @Param(value = "changeValue") String changeValue, @Param(value = "checkField") String checkField, @Param(value = "checkValue") String checkValue );
+	@Query(value = "UPDATE Company_Details SET revenue = :changeValue WHERE company_name = :checkValue", nativeQuery = true)
+	public Integer updateData(@Param("changeValue") float changeValue, @Param("checkValue") String checkValue );
+
 }

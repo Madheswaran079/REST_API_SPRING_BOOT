@@ -88,18 +88,19 @@ public class AdService {
 	}
 	
 	//select
-	public List<Advertisement> selectByData(String field,int value) {
-		return adr.selectData(field, value);
+	public List<Advertisement> selectByData(float value) {
+		return adr.selectData(value);
 	}
 	
 	//update
-	public boolean updateValue(String changeField,String changeValue,String checkField,String checkValue) {
+	public boolean updateValue(int changeValue, String checkValue) {
 		try {
-			adr.updateData(changeField, changeValue, checkField, checkValue);
+			adr.updateData(changeValue, checkValue);
 			return true;
 		}
 		catch(Exception e) {
 			return false;
 		}
 	}
+	
 }

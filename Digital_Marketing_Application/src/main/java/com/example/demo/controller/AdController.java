@@ -78,16 +78,17 @@ public class AdController {
 		return ads.getPage(pgNum, pgSize);
 	}
 	
-	@GetMapping("/selectAD/{field}/{value}")
-	public List<Advertisement> selectTheData(@PathVariable(value = "field") String field, @PathVariable(value = "value") int value) {
-		return ads.selectByData(field, value);
+	@GetMapping("/selectAD/{value}")
+	public List<Advertisement> selectTheData(@PathVariable(value = "value") float value) {
+		return ads.selectByData(value);
 	}
 	
-	@GetMapping("/updateAD/{changeField}/{changeValue}/{checkField}/{checkValue}")
-	public String updateTheData(@PathVariable(value = "changeField")String changeField,@PathVariable(value = "changeValue")String changeValue,@PathVariable(value = "checkField")String checkField,@PathVariable(value = "checkValue")String checkValue) {
-		if(ads.updateValue(changeField,changeValue,checkField,checkValue)) {
+	@PutMapping("/updateQAD/{changeValue}/{checkValue}")
+	public String updateTheData(@PathVariable(value = "changeValue")int changeValue, @PathVariable(value = "checkValue")String checkValue) {
+		if(ads.updateValue(changeValue,checkValue)) {
 			return "Updated successfully..!";
 		}
 		return "Can not update";
 	}
+
 }

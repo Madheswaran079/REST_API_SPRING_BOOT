@@ -92,18 +92,23 @@ public class PDService {
 	}
 	
 	//select
-	public List<PersonalDetails> selectByData(String field,String value) {
-		return pdr.selectData(field, value);
+	public List<PersonalDetails> selectByData(String value) {
+		return pdr.selectData(value);
 	}
 	
 	//update
-	public boolean updateValue(String changeField,String changeValue,String checkField,String checkValue) {
+	public boolean updateValue(long changeValue,String checkValue) {
 		try {
-			pdr.updateData(changeField, changeValue, checkField, checkValue);
+			pdr.updateData(changeValue,checkValue);
 			return true;
 		}
 		catch(Exception e) {
 			return false;
 		}
 	}
+	
+	//update
+//	public String deleteValue(String name) {
+//		return pdr.deleteData(name) + "deleted"	
+//	}
 }

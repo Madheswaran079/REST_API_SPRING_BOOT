@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 public class Advertisement {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderId;
 	private String product;
 	private float rate;

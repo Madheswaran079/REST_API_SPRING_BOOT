@@ -76,16 +76,17 @@ public class CDController {
 		return cds.getPage(pgNum, pgSize);
 	}
 	
-	@GetMapping("/selectCD/{field}/{value}")
-	public List<CompanyDetails> selectTheData(@PathVariable(value = "field") String field, @PathVariable(value = "value") int value) {
-		return cds.selectByData(field, value);
+	@GetMapping("/selectCD/{value}")
+	public List<CompanyDetails> selectTheData(@PathVariable(value = "value") int value) {
+		return cds.selectByData(value);
 	}
 	
-	@GetMapping("/updateCD/{changeField}/{changeValue}/{checkField}/{checkValue}")
-	public String updateTheData(@PathVariable(value = "changeField")String changeField,@PathVariable(value = "changeValue")String changeValue,@PathVariable(value = "checkField")String checkField,@PathVariable(value = "checkValue")String checkValue) {
-		if(cds.updateValue(changeField,changeValue,checkField,checkValue)) {
+	@PutMapping("/updateQCD/{changeValue}/{checkValue}")
+	public String updateTheData(@PathVariable(value = "changeValue")float changeValue,@PathVariable(value = "checkValue")String checkValue) {
+		if(cds.updateValue(changeValue,checkValue)) {
 			return "Updated successfully..!";
 		}
 		return "Can not update";
 	}
+	
 }
